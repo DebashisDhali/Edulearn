@@ -1,0 +1,24 @@
+{% extends "courses/base.html" %}
+
+{% load static %}
+
+{% block title %}Delete Lesson{% endblock %}
+
+{% block content %}
+<div class="container mt-5 my-5">
+    <h2>Are you sure you want to delete the lesson "{{ lesson.title }}"?</h2>
+    <p>This action cannot be undone.</p>
+    
+    <!-- Form with Bootstrap styling -->
+    <form method="post" class="p-4 border rounded bg-white shadow-sm">
+        {% csrf_token %}
+        
+        <!-- Delete button styled with Bootstrap -->
+        <button type="submit" class="btn btn-danger w-100">Yes, Delete</button>
+        
+        <!-- Cancel button styled with Bootstrap -->
+        <a href="{% url 'course_list' %}" class="btn btn-secondary mt-3 w-100">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}

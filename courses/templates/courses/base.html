@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}EduLearn{% endblock %}</title>
+
+    <!-- Bootstrap Local Integration -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <script src="{% static 'js/bootstrap.min.js' %}" defer></script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      /* Custom Styles */
+      html {
+        font-size: 16px; /* This will increase the size proportionally */
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .navbar {
+        background: linear-gradient(135deg, #5968a3, #764ba2);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 1rem;
+        color: #92400e;
+      }
+
+      .navbar-brand {
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: #fff !important;
+      }
+
+      .navbar-toggler {
+        border: none;
+      }
+
+      .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+      }
+
+      .container {
+        flex: 1;
+        padding: 10px;
+        gap: 27rem;
+      }
+
+      .alert {
+        border-radius: 8px;
+        font-weight: 500;
+        padding: 12px 16px;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+
+      .alert-success {
+        background-color: #d1fae5;
+        color: #065f46;
+        border-color: #a7f3d0;
+      }
+
+      .alert-error {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border-color: #fca5a5;
+      }
+
+      .alert-info {
+        background-color: #dbeafe;
+        color: #1e40af;
+        border-color: #93c5fd;
+      }
+
+      .alert-warning {
+        background-color: #fef3c7;
+        color: #92400e;
+        border-color: #fcd34d;
+      }
+
+      footer {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        padding: 0.8rem 0;
+        margin-top: auto;
+        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      footer p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      /* Custom Button Styles */
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border: none;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Card Styles */
+      .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        margin-bottom: 20px;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #d17676;
+        font-weight: 600;
+        border-radius: 12px 12px 0 0;
+        padding: 10px 12px;
+        text-align: center;
+      }
+
+      .card-body {
+        background: #cea2a2;
+        border-radius: 0 0 12px 12px;
+        padding: 10px;
+      }
+
+      /* Center-align text in the main content */
+      .text-center {
+        text-align: center;
+      }
+      .navbar .fa-user-circle {
+        color: #fff;
+      }
+
+      /* Flexbox utility for alignment */
+      .d-flex-center {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      li{
+        margin-left: 1rem;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">EduLearn</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active ms-5"
+                aria-current="page"
+                href="{% url 'home' %}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link ms-5"
+                href="{% if user.is_authenticated %}{% url 'course_list' %}{% else %}{% url 'home' %}{% endif %}"
+                >Courses</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+            <a href="/" class="nav-item d-flex align-items-center me-3 text-white">
+              {{ user.username }}
+              <i class="fas fa-user-circle me-2" style="font-size: 1.4rem"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-3">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Debashis Dhali. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

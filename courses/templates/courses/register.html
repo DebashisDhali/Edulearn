@@ -1,0 +1,79 @@
+{% extends "courses/base.html" %}
+{% load widget_tweaks %}
+{% block title %}Register | EduLearn{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg mt-5 p-4 rounded-4 border-0">
+        <h2 class="text-center fw-semibold mb-4">Create Your Account 🚀</h2>
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-success text-center">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="id_username" class="form-label">Username</label>
+            {{ form.username|add_class:"form-control rounded-3 py-2" }}
+          </div>
+
+          <div class="mb-3 position-relative">
+            <label for="id_password1" class="form-label">Password</label>
+            <div class="input-group">
+              <input type="password" name="password1" class="form-control rounded-end-0 py-2" id="id_password1">
+              <span class="input-group-text bg-white border-start-0 rounded-end" onclick="togglePassword('id_password1', this)" style="cursor: pointer; padding: 0 10px;">
+                <i class="fa-solid fa-eye"></i> <!-- Default eye icon -->
+              </span>
+            </div>
+          </div>
+          
+          <div class="mb-4 position-relative">
+            <label for="id_password2" class="form-label">Confirm Password</label>
+            <div class="input-group">
+              <input type="password" name="password2" class="form-control rounded-end-0 py-2" id="id_password2">
+              <span class="input-group-text bg-white border-start-0 rounded-end" onclick="togglePassword('id_password2', this)" style="cursor: pointer; padding: 0 10px;">
+                <i class="fa-solid fa-eye"></i> <!-- Default eye icon -->
+              </span>
+            </div>
+          </div>
+          
+          
+          
+
+          <button type="submit" class="btn btn-primary w-100 rounded-3 py-2" style="background: linear-gradient(135deg, #43cea2, #185a9d); border: none;">
+            Register
+          </button>
+        </form>
+
+        <div class="text-center mt-3">
+          <p>Already have an account? <a href="{% url 'login' %}" class="text-decoration-none fw-semibold text-primary">Login here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function togglePassword(fieldId, icon) {
+  const field = document.getElementById(fieldId);
+  const iconElement = icon.querySelector('i');
+  
+  if (field.type === "password") {
+    field.type = "text";
+    iconElement.classList.remove('fa-eye');
+    iconElement.classList.add('fa-eye-slash'); // Change to eye-slash icon
+  } else {
+    field.type = "password";
+    iconElement.classList.remove('fa-eye-slash');
+    iconElement.classList.add('fa-eye'); // Change to eye icon
+  }
+}
+
+</script>
+{% endblock %}

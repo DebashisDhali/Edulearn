@@ -1,0 +1,40 @@
+{% extends "courses/base.html" %}
+
+{% block title %}
+    {% if course %}Edit Course{% else %}Create Course{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">
+        {% if course %}Edit Course{% else %}Create Course{% endif %}
+    </h2>
+
+    <div class="col-md-8 mx-auto">
+        <form method="post" enctype="multipart/form-data" class="p-4 border rounded bg-light shadow">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger small">
+                            {{ field.errors|striptags }}
+                        </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                        <div class="form-text">{{ field.help_text }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-success w-100">
+                {% if course %}Update{% else %}Save{% endif %} Course
+            </button>
+        </form>
+
+        <a href="{% url 'course_list' %}" class="btn btn-secondary mt-3 w-100">Back to Courses</a>
+    </div>
+</div>
+{% endblock %}

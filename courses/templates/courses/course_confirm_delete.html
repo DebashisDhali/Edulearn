@@ -1,0 +1,39 @@
+
+
+{% extends "courses/base.html" %}
+
+{% block title %}Delete Course{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="col-md-6 mx-auto text-center">
+        <h2>
+            {% if course %}
+                Are you sure you want to delete "{{ course.title }}"?
+            {% else %}
+                Course not found.
+            {% endif %}
+        </h2>
+
+        {% if course %}
+            <!-- Warning message styled with Bootstrap -->
+            <p class="text-danger">This action cannot be undone.</p>
+            
+            <!-- Form with Bootstrap styling -->
+            <form method="post" class="d-inline-block">
+                {% csrf_token %}
+                
+                <!-- Delete button styled with Bootstrap -->
+                <button type="submit" class="btn btn-danger w-100 mb-2">Yes, Delete</button>
+            </form>
+
+            <!-- Cancel button styled with Bootstrap -->
+            <a href="{% url 'course_list' %}" class="btn btn-secondary w-100 mb-2">Cancel</a>
+        {% else %}
+            <!-- Back to courses button styled with Bootstrap -->
+            <a href="{% url 'course_list' %}" class="btn btn-primary mt-3">Back to Courses</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

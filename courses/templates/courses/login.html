@@ -1,0 +1,136 @@
+{% extends "courses/base.html" %}
+{% load widget_tweaks %}
+{% block title %}Login | EduLearn{% endblock %}
+
+{% block content %}
+<style>
+  .login-container {
+    max-width: 450px;
+    margin: 6rem auto;
+    background: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-heading {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #4b4b4b;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 1rem;
+  }
+
+  .btn-login {
+    border-radius: 10px;
+    padding: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    font-weight: 500;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+  }
+
+  .register-link,
+  .forgot-password {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .register-link a,
+  .forgot-password a {
+    color: #667eea;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .register-link a:hover,
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+
+  .alert {
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  .input-group-text {
+    cursor: pointer;
+  }
+</style>
+
+<div class="container">
+  <div class="login-container">
+    <h2 class="login-heading">Welcome Back</h2>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success text-center">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      
+      <!-- Username Input -->
+      <div class="mb-3">
+        <label for="id_username" class="form-label">Username</label>
+        {{ form.username|add_class:"form-control" }}
+      </div>
+      
+      <!-- Password Input with Toggle -->
+      <div class="mb-3 position-relative">
+        <label for="id_password" class="form-label">Password</label>
+        <div class="input-group">
+          <input type="password" name="password" class="form-control rounded-end-0 py-2" id="id_password">
+          <span class="input-group-text bg-white border-start-0 rounded-end" onclick="togglePassword('id_password', this)" style="padding: 0 10px;">
+            <i class="fa-solid fa-eye"></i> <!-- Default eye icon -->
+          </span>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-login w-100 mt-2">Login</button>
+    </form>
+
+    <!-- Forgot Password Link -->
+    <div class="forgot-password">
+      <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+    </div>
+
+    <!-- Register Link -->
+    <div class="register-link">
+      <p>Don't have an account? <a href="{% url 'register' %}">Create one</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to toggle password visibility
+  function togglePassword(fieldId, icon) {
+    const field = document.getElementById(fieldId);
+    const iconElement = icon.querySelector('i');
+    
+    if (field.type === "password") {
+      field.type = "text";
+      iconElement.classList.remove('fa-eye');
+      iconElement.classList.add('fa-eye-slash'); // Change to eye-slash icon
+    } else {
+      field.type = "password";
+      iconElement.classList.remove('fa-eye-slash');
+      iconElement.classList.add('fa-eye'); // Change to eye icon
+    }
+  }
+</script>
+
+{% endblock %}
