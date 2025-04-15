@@ -1,1 +1,1 @@
-gunicorn edulearn.wsgi:application
+gunicorn Edulearn.wsgi:application
