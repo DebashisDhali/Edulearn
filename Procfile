@@ -1,0 +1,1 @@
+gunicorn Edulearn.wsgi:application

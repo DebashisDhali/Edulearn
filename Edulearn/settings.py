@@ -43,7 +43,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'edulearn.urls'
+ROOT_URLCONF = 'Edulearn.urls'
 
 TEMPLATES = [
     {
@@ -61,7 +61,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'edulearn.wsgi.application'
+WSGI_APPLICATION = 'Edulearn.wsgi.application'
 
 # Database
 DATABASES = {
